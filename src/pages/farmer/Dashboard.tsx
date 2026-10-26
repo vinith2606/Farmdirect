@@ -1,8 +1,8 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 import {
-  ShoppingBag, DollarSign, Package, Star, Cloud, Sparkles,
+  ShoppingBag, DollarSign, Package, Star,
   Award,
 } from 'lucide-react'
 import { StatCard } from '@/components/ui/Card'
@@ -48,21 +48,6 @@ export default function FarmerDashboard() {
     fetchDashboard()
   }, [userId])
 
-  const weatherTemp = useMemo(() => {
-    const now = new Date()
-    const hour = now.getHours()
-    const day = now.getDate()
-    return 28 + ((hour + day) % 8)
-  }, [])
-
-  const weatherLabel = useMemo(() => {
-    const now = new Date().getHours()
-    if (now >= 6 && now < 12) return 'Sunny'
-    if (now >= 12 && now < 17) return 'Warm'
-    if (now >= 17 && now < 21) return 'Pleasant'
-    return 'Cool'
-  }, [])
-
   return (
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -98,29 +83,6 @@ export default function FarmerDashboard() {
         </div>
 
         <div className="space-y-4">
-          <Card className="gradient-primary !p-5">
-            <div className="flex items-center gap-2">
-              <Sparkles className="h-5 w-5 text-background" />
-              <h3 className="font-semibold text-background">{t('farmer.aiPrice')}</h3>
-            </div>
-            <p className="mt-2 text-sm leading-6 text-background/80">{t('farmer.aiPriceDesc')}</p>
-            <div className="mt-4 grid grid-cols-2 gap-2 text-center text-sm text-background">
-              <div className="rounded-xl bg-background/10 p-3"><p className="text-xl font-bold">{productCount}</p><p className="text-xs opacity-75">{t('farmer.productsCount')}</p></div>
-              <div className="rounded-xl bg-background/10 p-3"><p className="text-xl font-bold">{orderCount}</p><p className="text-xs opacity-75">{t('farmer.todayOrders')}</p></div>
-            </div>
-          </Card>
-
-          <Card>
-            <div className="flex items-center gap-3">
-              <Cloud className="w-10 h-10 text-blue" />
-              <div>
-                <h3 className="font-semibold">{t('farmer.weather')}</h3>
-                <p className="text-2xl font-bold">{weatherTemp}°C</p>
-                <p className="text-xs text-muted">{weatherLabel}</p>
-              </div>
-            </div>
-          </Card>
-
           <Card>
             <div className="flex items-center justify-between">
               <div>
