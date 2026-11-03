@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
-import { Search, Ban, CheckCircle, Users, ExternalLink } from 'lucide-react'
+import { Search, Ban, CheckCircle, Users } from 'lucide-react'
 import { Card } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { Button } from '@/components/ui/Button'
 import { Badge } from '@/components/ui/Badge'
 import { EmptyState } from '@/components/ui/Modal'
+import { CertificatePreviewButton } from '@/components/common/CertificatePreviewButton'
 import api, { endpoints } from '@/services/api'
 
 interface AdminUser {
@@ -100,7 +101,7 @@ export default function AdminFarmers() {
                         <Badge variant={user.certificateReviewStatus === 'verified' ? 'success' : user.certificateReviewStatus === 'rejected' ? 'danger' : 'warning'}>
                           {user.certificateReviewStatus || 'pending'}
                         </Badge>
-                          {user.certificateDownloadUrl && <a href={user.certificateDownloadUrl} title="Download certificate" className="text-primary"><ExternalLink className="w-4 h-4" /></a>}
+                          {user.certificateId && <CertificatePreviewButton certificateId={user.certificateId} compact />}
                       </div>
                     ) : <span className="text-muted">Not uploaded</span>}
                   </td>
